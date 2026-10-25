@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第11题｜三棱锥交互探索</title>
+<style>
+:root{font-family:Inter,"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;color-scheme:dark;--bg:#08111f;--panel:#101e32;--border:#2b4160;--ink:#f0f6ff;--muted:#9fb1c8;--teal:#33dfbe;--orange:#ffbc65;--purple:#b8a0ff;--blue:#88bbff}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 5% 0%,#1b3151 0,transparent 44%),var(--bg);color:var(--ink)}.shell{max-width:1220px;margin:auto;padding:22px}.eyebrow{color:var(--teal);letter-spacing:.15em;font-weight:800;font-size:11px}h1{font-size:clamp(22px,3.4vw,34px);letter-spacing:-.025em;margin:6px 0 9px}.intro{font-size:14px;color:var(--muted);line-height:1.65;margin:0 0 18px}.workspace{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr);gap:16px}.panel{border:1px solid var(--border);border-radius:20px;background:linear-gradient(160deg,#12243c,#0d192c);box-shadow:0 15px 44px #0002;overflow:hidden}.viewport{position:relative;min-height:460px}.viewport canvas{width:100%;height:460px;display:block;cursor:grab;touch-action:none}.viewport canvas:active{cursor:grabbing}.hint{position:absolute;top:14px;left:15px;font-size:12px;color:#bfd0e9;background:#0b1426c9;padding:8px 10px;border:1px solid #3a526e88;border-radius:10px;pointer-events:none}.angle-pill{position:absolute;top:15px;right:16px;color:#fff;background:#1a354bce;padding:8px 12px;border:1px solid #40627d;border-radius:12px;font-size:13px}.angle-pill b{color:var(--teal);font-size:18px}.legend{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:12px;margin:0 8px 12px}.dot{display:inline-block;width:11px;height:3px;vertical-align:middle;margin-right:6px;border-radius:4px}.model-note{margin:8px 18px 17px;color:var(--muted);font-size:12px;text-align:center}.controls{padding:18px}.controls h2{font-size:15px;margin:0 0 12px}.case-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:14px}.case-tabs button,.presets button,.btn{background:#1b304d;border:1px solid #415878;color:#d6e4f6;padding:10px 5px;border-radius:11px;cursor:pointer;font:inherit;font-weight:700;transition:.15s}.case-tabs button:hover,.presets button:hover,.btn:hover{background:#294767}.case-tabs button.active{background:#123e3c;border:1px solid #39d9b6;color:#6bffe0}.case-tabs button:focus-visible,.presets button:focus-visible,.btn:focus-visible,input:focus-visible{outline:2px solid #a1bfff;outline-offset:2px}.question{font-weight:750;line-height:1.55;font-size:15px;min-height:48px}.correct{color:#67f0c8;font-size:12px;font-weight:800;margin-top:7px}.formula{margin-top:12px;background:#071524;border:1px solid #304761;border-radius:13px;padding:14px;min-height:113px}.formula .label{color:#aac1db;font-size:12px}.formula .value{color:#fff;font-size:23px;font-weight:800;margin-top:5px;font-variant-numeric:tabular-nums}.formula .details{color:#c1d2e8;font-size:12px;line-height:1.6;margin-top:7px}.slider-card{margin-top:18px;padding-top:16px;border-top:1px solid #364862}.slider-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;font-weight:750}.slider-header output{color:var(--teal);font-size:20px;font-variant-numeric:tabular-nums}.slider{width:100%;accent-color:#40debb;cursor:pointer}.scale{display:flex;justify-content:space-between;color:#849ab4;font-size:11px}.presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.presets button{padding:8px 9px;font-size:12px;font-weight:600}.presets button.selected{border-color:var(--teal);color:var(--teal)}.description{margin-top:16px;color:#c1cfe2;font-size:13px;line-height:1.73}.row{display:flex;align-items:center;justify-content:space-between;gap:9px;margin-top:13px}.toggle{display:flex;gap:7px;align-items:center;color:#c5d2e8;font-size:12px;cursor:pointer}.toggle input{accent-color:var(--teal)}.btn{padding:8px 12px;font-size:12px}.summary{margin-top:16px;padding:16px 18px;background:#10213a;border:1px solid #2f4c68;border-radius:17px;color:#cddbef;font-size:13px;line-height:1.7}.summary strong{color:#f0f7ff}.summary .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}.tag{border-radius:9px;padding:4px 9px;color:#78f4d3;border:1px solid #286753;background:#133e38;font-weight:800}.footer{color:#7890a9;font-size:12px;margin-top:15px}@media(max-width:800px){.shell{padding:12px}.workspace{grid-template-columns:1fr}.viewport{min-height:350px}.viewport canvas{height:350px}.controls{padding:16px}.case-tabs button{padding:9px 3px}}
+</style></head><body><main class="shell">
+<div class="eyebrow">INTERACTIVE GEOMETRY LAB · QUESTION 11</div><h1>亲手转动三棱锥，验证 A / B / C / D</h1>
+<p class="intro">已知 △ABC 为等腰直角三角形，∠ACB=90°，AB=2√2；△ABD 为等边三角形。θ 是二面角 C—AB—D。拖动模型改变视角，拖动角度条让 D 绕 AB 转动。</p>
+<section class="workspace"><div class="panel viewport"><canvas id="scene" aria-label="可通过拖动旋转视角的三棱锥三维模型"></canvas><div class="hint">↔ 拖动：转动视角　·　滚轮：缩放</div><div class="angle-pill">θ = <b id="floatingAngle">120°</b></div></div>
+<div class="panel controls"><h2>选择要研究的选项</h2><div class="case-tabs"><button data-case="A">A</button><button data-case="B">B</button><button data-case="C">C</button><button data-case="D" class="active">D</button></div>
+<div class="question" id="question"></div><div class="correct" id="correct">✓ 命题正确</div><div class="formula"><div class="label" id="metricLabel"></div><div class="value" id="metricValue"></div><div class="details" id="metricDetail"></div></div>
+<div class="slider-card"><div class="slider-header"><span>转动二面角 θ</span><output id="angleOutput" for="angle">120°</output></div><input class="slider" id="angle" type="range" min="0" max="180" step="0.00001" value="120"><div class="scale"><span>0° · 共面</span><span>90° · 体积最大</span><span>180° · 共面</span></div>
+<div class="presets"><button data-deg="0">0°</button><button data-deg="54.73561">C 垂直角</button><button data-deg="90">90°</button><button data-deg="120" class="selected">D：120°</button><button data-deg="180">180°</button></div></div>
+<p class="description" id="explain"></p><div class="row"><label class="toggle"><input type="checkbox" id="labels" checked> 显示顶点及辅助线</label><button class="btn" id="reset">重置视角</button></div></div></section>
+<div class="legend" style="margin-top:15px"><span><i class="dot" style="background:#ffbd70"></i>AB</span><span><i class="dot" style="background:#30dec1"></i>CD</span><span><i class="dot" style="background:#b9a8ff"></i>AD</span><span><i class="dot" style="background:#81b6ff"></i>BC</span></div>
+<div class="summary"><strong>最终判断：A、B、C、D 全部正确。</strong><div class="badges"><span class="tag">A ✓ 恒垂直</span><span class="tag">B ✓ 最大体积不足 5/3</span><span class="tag">C ✓ θ≈54.74°</span><span class="tag">D ✓ 面积=104π/9</span></div>采用坐标 A=(-√2,0,0)、B=(√2,0,0)、C=(0,√2,0)、D=(0,√6 cosθ,√6 sinθ)，其中 AB 是旋转轴。</div><div class="footer">小提示：取 θ=120° 并选择 D，可以观察外接球、球心 O、顶点 A/B/C/D 的关系。θ=0° 和 180° 时四点共面，不存在有限外接球。</div></main>
+<script>
+(()=>{
+'use strict';
+const canvas=document.getElementById('scene'), ctx=canvas.getContext('2d'); const theta=document.getElementById('angle');
+let active='D', yaw=-0.54,elev=0.43,zoom=1, drag=false, px=0,py=0, showLabels=true;
+const sqrt=Math.sqrt, P=(x,y,z)=>({x,y,z});
+const A=P(-sqrt(2),0,0),B=P(sqrt(2),0,0),C=P(0,sqrt(2),0),M=P(0,0,0);
+const colors={A:'#ffbd70',B:'#34dcbf',C:'#b9a8ff',D:'#a4c4ff'};
+const caseText={
+ A:{question:'A. AB ⟂ CD',explain:'始终成立：AB 沿 x 轴，而 C、D 都在垂直于 AB 的中垂平面 x=0 上。因此不论怎样转动 D，CD 都与 AB 垂直。'},
+ B:{question:'B. 不存在 θ，使三棱锥体积为 5/3',explain:'底面积 S△ABC=2，D 到底面 ABC 的高度 h=√6·sinθ，因此 V=(2√6/3)·sinθ。最大值约 1.633 小于 5/3≈1.667。'},
+ C:{question:'C. 存在锐角 θ，使 AD · BC=0',explain:'向量 AD=(√2,√6 cosθ,√6 sinθ)，BC=(-√2,√2,0)。点积为 -2+2√3 cosθ。令其为零，得到 θ=arccos(1/√3)≈54.7356°，确实是锐角。'},
+ D:{question:'D. 当 θ=120° 时，外接球面积为 104π/9',explain:'四点外接球的球心 O=(0,0,2/(√6 sinθ))。当 θ=120°，球心高度 2√2/3，半径平方 R²=2+8/9=26/9，因此 4πR²=104π/9。'}
+};
+const els={question:document.getElementById('question'),metricLabel:document.getElementById('metricLabel'),metricValue:document.getElementById('metricValue'),metricDetail:document.getElementById('metricDetail'),explain:document.getElementById('explain'),out:document.getElementById('angleOutput'),floating:document.getElementById('floatingAngle')};
+function resize(){const b=canvas.getBoundingClientRect();const d=Math.min(devicePixelRatio||1,2);canvas.width=Math.max(1,Math.floor(b.width*d));canvas.height=Math.max(1,Math.floor(b.height*d));ctx.setTransform(d,0,0,d,0,0);draw();}
+const dot=(u,v)=>u.x*v.x+u.y*v.y+u.z*v.z,add=(u,v)=>P(u.x+v.x,u.y+v.y,u.z+v.z),subtract=(u,v)=>P(u.x-v.x,u.y-v.y,u.z-v.z),scale=(u,k)=>P(u.x*k,u.y*k,u.z*k);
+function project(p){const sy=Math.sin(yaw),cy=Math.cos(yaw),se=Math.sin(elev),ce=Math.cos(elev);
+  const right=P(cy,sy,0),up=P(-sy*se,cy*se,ce),towards=P(sy*ce,-cy*ce,se);
+  let x=dot(p,right),y=dot(p,up),depth=dot(p,towards); let perspective=8/(8-depth*0.48);const w=canvas.clientWidth,h=canvas.clientHeight;
+  return {x:w*.5+x*Math.min(w,h)*(w<650?.19:.238)*zoom*perspective,y:h*.535-y*Math.min(w,h)*(w<650?.19:.238)*zoom*perspective,depth};}
+function line(p,q,color='#d6e9ff',width=2,dashed=false,alpha=1){const a=project(p),b=project(q);ctx.save();ctx.globalAlpha=alpha;ctx.strokeStyle=color;ctx.lineWidth=width;ctx.lineCap='round';if(dashed)ctx.setLineDash([5,5]);ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();ctx.restore();}
+function polygon(pts,color){const pp=pts.map(project);ctx.save();ctx.beginPath();ctx.moveTo(pp[0].x,pp[0].y);pp.slice(1).forEach(v=>ctx.lineTo(v.x,v.y));ctx.closePath();ctx.fillStyle=color;ctx.fill();ctx.restore();}
+function point(p,label,color='#fff',radius=4){const q=project(p);ctx.save();ctx.shadowColor=color;ctx.shadowBlur=10;ctx.beginPath();ctx.arc(q.x,q.y,radius,0,7);ctx.fillStyle=color;ctx.fill();ctx.restore();if(showLabels){ctx.save();ctx.font='700 15px system-ui,sans-serif';ctx.fillStyle='#f3f8ff';ctx.strokeStyle='#0e1e34';ctx.lineWidth=4;ctx.strokeText(label,q.x+10,q.y-10);ctx.fillText(label,q.x+10,q.y-10);ctx.restore();}}
+function measure(){const t=Number(theta.value)*Math.PI/180,D=P(0,sqrt(6)*Math.cos(t),sqrt(6)*Math.sin(t));return{t,D,vol:2*sqrt(6)/3*Math.sin(t),dot:-2+2*sqrt(3)*Math.cos(t),centre:sqrt(6)*Math.sin(t)>1e-5?P(0,0,2/(sqrt(6)*Math.sin(t))):null};}
+function sphere(O,r){ // Latitudes + longitudes. Wireframe purposefully behind opaque vertex edges.
+ const N=90,pi=Math.PI;
+ for(let j=1;j<=5;j++){let lat=-pi/2+j*pi/6;let previous=null;
+   for(let i=0;i<=N;i++){let lon=i*2*pi/N,p=P(O.x+r*Math.cos(lat)*Math.cos(lon),O.y+r*Math.cos(lat)*Math.sin(lon),O.z+r*Math.sin(lat));if(previous)line(previous,p,'#5e9ad3',.8,false,.19);previous=p;}}
+ for(let j=0;j<10;j++){let lon=j*pi/5,previous=null;
+   for(let i=0;i<=N;i++){let lat=-pi/2+i*pi/N,p=P(O.x+r*Math.cos(lat)*Math.cos(lon),O.y+r*Math.cos(lat)*Math.sin(lon),O.z+r*Math.sin(lat));if(previous)line(previous,p,'#5e9ad3',.8,false,.19);previous=p;}}
+}
+function draw(){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;ctx.clearRect(0,0,w,h);
+ const {D,centre}=measure();let grad=ctx.createRadialGradient(w*.48,h*.36,5,w*.5,h*.5,w*.57);grad.addColorStop(0,'#203653');grad.addColorStop(1,'#101c30');ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+ // Subtle viewport plane grid
+ for(let i=-5;i<=5;i++){line(P(-4.5,i*.8,-1.5),P(4.5,i*.8,-1.5),'#526782',.65,false,.075);line(P(i*.8,-4.5,-1.5),P(i*.8,4.5,-1.5),'#526782',.65,false,.075);}
+ if(active==='D' && centre){let r=sqrt(2+centre.z**2);if(r<12)sphere(centre,r);}
+ const faces=[{pts:[A,B,C],fill:'rgba(49,218,174,.11)'},{pts:[A,B,D],fill:'rgba(186,160,255,.13)'},{pts:[A,C,D],fill:'rgba(122,174,244,.08)'},{pts:[B,C,D],fill:'rgba(103,141,206,.085)'}];
+ faces.sort((u,v)=>v.pts.reduce((s,p)=>s+project(p).depth,0)-u.pts.reduce((s,p)=>s+project(p).depth,0));faces.forEach(o=>polygon(o.pts,o.fill));
+ // Base and silhouette segments
+ line(A,C,'#8dacca',1.4);line(B,C,active==='C'?'#86c1ff':'#8dacca',active==='C'?4:1.4);line(B,D,'#9aaaca',1.5);line(A,D,active==='C'?'#b5a2ff':'#8dacca',active==='C'?4:1.6);
+ line(A,B,'#ffbc69',active==='A'?4.3:3);line(C,D,'#35dbc0',active==='A'?4.3:2.7);
+ // altitude to ABC
+ if(active==='B'){let foot=P(0,D.y,0);line(D,foot,'#e7f07d',2,true);point(foot,'H','#e7f07d',3);}
+ if(active==='D'&&centre){line(centre,A,'#82bdfa',1.4,true,.8);line(centre,D,'#82bdfa',1.4,true,.8);point(centre,'O','#9dcaff',4);}
+ if(showLabels){point(M,'M','#cbd4e4',3);}point(A,'A','#ffbd70');point(B,'B','#ffbd70');point(C,'C','#40efcb');point(D,'D','#bbaaff',5);
+}
+function render(){const {t,vol,dot:product,centre}=measure(),deg=Number(theta.value);const angle=(Math.round(deg*100)/100).toString()+'°';els.out.textContent=angle;els.floating.textContent=angle;els.question.textContent=caseText[active].question;els.explain.textContent=caseText[active].explain;
+ if(active==='A'){els.metricLabel.textContent='AB · CD';els.metricValue.textContent='0（恒成立）';els.metricDetail.textContent='AB=(2√2, 0, 0)，CD 的 x 分量=0';}
+ if(active==='B'){els.metricLabel.textContent='当前体积 V / 最大体积 Vmax';els.metricValue.textContent=vol.toFixed(4)+' / '+(2*sqrt(6)/3).toFixed(4);els.metricDetail.textContent='目标 5/3 ≈ 1.6667；永远大于 Vmax ≈ 1.6330';}
+ if(active==='C'){els.metricLabel.textContent='AD · BC（为零即垂直）';els.metricValue.textContent=Math.abs(product)<.0001?'≈ 0':product.toFixed(4);els.metricDetail.textContent='-2 + 2√3 cosθ'+(Math.abs(product)<.0001?'；此时 AD ⟂ BC':'');}
+ if(active==='D'){els.metricLabel.textContent='外接球表面积 S = 4πR²'; if(centre){let r2=2+centre.z**2;els.metricValue.textContent=(4*r2).toFixed(4)+'π';els.metricDetail.textContent='R² = '+r2.toFixed(6)+'；在 θ=120° 时，S=104π/9';}else{els.metricValue.textContent='不存在';els.metricDetail.textContent='四点共面且不共圆，没有有限的外接球';}}
+ document.querySelectorAll('[data-deg]').forEach(b=>b.classList.toggle('selected',Math.abs(Number(b.dataset.deg)-deg)<.08));
+ draw();}
+ function selectCase(c){active=c;document.querySelectorAll('[data-case]').forEach(b=>b.classList.toggle('active',b.dataset.case===c));render();}
+ document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>selectCase(b.dataset.case)));
+ document.querySelectorAll('[data-deg]').forEach(b=>b.addEventListener('click',()=>{theta.value=b.dataset.deg;render()}));
+ theta.addEventListener('input',render);document.getElementById('labels').addEventListener('change',e=>{showLabels=e.target.checked;draw()});
+ document.getElementById('reset').addEventListener('click',()=>{yaw=-.54;elev=.43;zoom=1;draw()});
+ canvas.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;canvas.setPointerCapture(e.pointerId)});
+ canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw+=(e.clientX-px)*.008;elev=Math.max(-1.28,Math.min(1.28,elev+(e.clientY-py)*.008));px=e.clientX;py=e.clientY;draw()});
+ canvas.addEventListener('pointerup',()=>{drag=false});canvas.addEventListener('pointercancel',()=>{drag=false});
+ canvas.addEventListener('wheel',e=>{e.preventDefault();zoom=Math.max(.55,Math.min(1.8,zoom*(e.deltaY>0?.92:1.08)));draw()},{passive:false});
+ if(typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(canvas);window.addEventListener('resize',resize);resize();render();
+})();
+</script></body></html>
